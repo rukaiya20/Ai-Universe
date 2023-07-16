@@ -4,13 +4,13 @@ const fetchAllInformation = () =>{
     .then((data) => showInformation(data.data.tools))
 };
 
-const fetchSingleInformation = () =>{
-    fetch("https://openapi.programming-hero.com/api/ai/tool/01")
-    .then((res) => res.json())
-    .then((data) => showInformation(data.data))
+// const fetchSingleInformation = () =>{
+//     fetch("https://openapi.programming-hero.com/api/ai/tool/01")
+//     .then((res) => res.json())
+//     .then((data) => showInformation(data.data))
     
-};
-fetchSingleInformation();
+// };
+// fetchSingleInformation();
 
 const showInformation = data => {
       const infoContainer = document.getElementById("info-container");
@@ -28,7 +28,7 @@ const showInformation = data => {
           <div class="d-flex justify-content-between">
            <p class="fw-bolder text-secondary fs-6 my-3">${singleInfo.published_in}
            </p>
-          <a href="#" class="mt-3 text-danger"><i class="fa-solid fa-arrow-right"></i></a>
+          <a href="#" class="mt-3 text-danger"><i class="fa-solid fa-arrow-right" onclick="fetchShowDetail('${singleInfo.id}')"></i></a>
           </div>
         </div>
       </div>`;
@@ -38,6 +38,11 @@ const showInformation = data => {
       )
 
 }
-
+const fetchShowDetail = info_id =>{
+  let url =`https://openapi.programming-hero.com/api/ai/tool/${info_id}`
+  fetch(url)
+  .then(res => res.json())
+  .then(data => console.log(data.data))
+}
 
 
