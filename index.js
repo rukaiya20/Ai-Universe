@@ -1,48 +1,65 @@
-const fetchAllInformation = () =>{
-    fetch("https://openapi.programming-hero.com/api/ai/tools")
-    .then((res) => res.json())
-    .then((data) => showInformation(data.data.tools))
-};
+const fetchAllInformation = async (dataLimit) => {
+  showSpinner(true)
+  const res = await fetch('https://openapi.programming-hero.com/api/ai/tools');
+  const data = await res.json();
+  showInformation(data.data.tools, dataLimit);
+}
 
-// const fetchSingleInformation = () =>{
-//     fetch("https://openapi.programming-hero.com/api/ai/tool/01")
-//     .then((res) => res.json())
-//     .then((data) => showInformation(data.data))
-    
-// };
-// fetchSingleInformation();
-
-const showInformation = data => {
-      const infoContainer = document.getElementById("info-container");
-      data.forEach(singleInfo => {
-        const card = document.createElement('div');
-        card.classList.add('card','col-lg-4','border-0','mb-4');
-        card.innerHTML = ` <div class="border rounded-3">
-        <img src="${singleInfo.image}" class="card-img-top p-3 " alt="...">
-        <div class="card-body">
-          <h5 class="card-title fw-bold fs-4">Features</h5>
-          <p class="card-text fw-bolder text-secondary fs-6 mb-1">1. ${singleInfo.features[0]}</p>
-          <p class="card-text fw-bolder text-secondary fs-6 mb-1">2. ${singleInfo.features[1]}</p>
-          <p class="card-text fw-bolder text-secondary fs-6 mb-3 border-bottom pb-4 ">3. ${singleInfo.features[2]}</p>
-          <h5 class="card-title fw-bold fs-4 my-2">${singleInfo.name}</h5>
-          <div class="d-flex justify-content-between">
-           <p class="fw-bolder text-secondary fs-6 my-3">${singleInfo.published_in}
-           </p>
-          <a href="#" class="mt-3 text-danger"><i class="fa-solid fa-arrow-right" onclick="fetchShowDetail('${singleInfo.id}')"></i></a>
+const showInformation = (data, dataLimit) => {
+  //show all singleInfo
+  const showAll = document.getElementById('show-all')
+  if (dataLimit && data.length > 10) {
+      data = data.slice(0, 6);
+      showAll.classList.remove('hidden')
+  }
+  else {
+      showAll.classList.add('hidden')
+  }
+  const infoContainer = document.getElementById('info-container');
+  infoContainer.innerHTML = '';
+  data.forEach(singleInfo => {
+      // console.log(singleInfo)
+      const div = document.createElement('div');
+      div.classList.add('card', 'w-full', 'bg-base-100', 'shadow-sm', 'border');
+      div.innerHTML = `
+      <figure class="p-3 ">
+          <img src="${singleInfo.image}"
+          alt="Shoes"
+          class="rounded-xl" style="height:230px" />
+      </figure>
+      <div class="card-body px-3">
+          <h2 class="card-title font-bold">
+          Features</h2>
+          <ol id="${singleInfo.id}">
+          </ol>
+          <hr class="border-1">
+          <div
+              class="card-actions flex singleInfos-center justify-between">
+              <div>
+                  <h2
+                      class="text-1xl font-bold mb-2">${singleInfo.name}</h2>
+                  <p><i
+                          class="fa-solid fa-calendar-days "></i>
+                      ${singleInfo.published_in}</p>
+              </div>
+              <div>
+              <label for="my-modal-3" onclick="loadDetailsData(${singleInfo.id})">
+              <i class="fa-solid fa-arrow-right"></i>
+              </label> 
+              </div>
           </div>
-        </div>
-      </div>`;
-      infoContainer.appendChild(card)
-      }
-
-      )
-
+      </div>
+      `;
+      container.appendChild(div);
+      // //features singleInfo
+      const featuresContainer = document.getElementById(singleInfo.id);
+      let num = 0;
+      singleInfo.features.forEach(featuresInfo => {
+          const li = document.createElement('li');
+          li.innerText = `${num += 1} ${'.'} $featuresInfo}`
+          featuresContainer.appendChild(li)
+      })
+  });
+  showSpinner(false)
 }
-const fetchShowDetail = info_id =>{
-  let url =`https://openapi.programming-hero.com/api/ai/tool/${info_id}`
-  fetch(url)
-  .then(res => res.json())
-  .then(data => console.log(data.data))
-}
-
 
