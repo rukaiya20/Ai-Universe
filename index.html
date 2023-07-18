@@ -38,7 +38,7 @@
     <main>
         <section>
             <div id="infoContainer"
-                class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  gap-4 w-9/12 mx-auto mt-12">
+                class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  gap-6 w-9/12 mx-auto mt-12 ">
             </div>
         </section>
         <!-- show all -->
@@ -62,7 +62,21 @@
                 </div>
             </div>
         </section>
-
+        <!-- modal -->
+        <section>
+            <input type="checkbox" id="modalBody"
+                class="modal-toggle" />
+            <div class="modal">
+                <div
+                    class="modal-box relative w-11/12 max-w-4xl">
+                    <label for="modalBody"
+                        class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
+                    <div id="modal-card"
+                        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4 p-6">
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
     <!-- main section end -->
 
