@@ -31,9 +31,9 @@ const showInformation = (data, dataLimit) => {
           Features</h2>
           <ol class="text-gray-600" id="${singleInfo.id}">
           </ol>
-          <hr class="border-1">
+          
           <div
-              class="card-actions flex items-center justify-between">
+              class="card-actions flex items-center justify-between border-b-2 pb-8">
               <div>
                   <h2
                       class="text-1xl font-bold mb-2">${singleInfo.name}</h2>
@@ -93,7 +93,71 @@ const loadDetailsInfo = async (itemId) => {
   cardDetails(data.data)
 }
 
-
+const cardDetails = (data) => {
+  const modalInformation = document.getElementById('modal-card');
+  modalInformation.innerHTML = `
+<div>
+  <div
+      class="card w-full bg-red-50 shadow-sm border border-red-400">
+      <div
+          class="card-body p-3">
+          <h2 class="card-title">
+              ${data.description}
+          </h2>
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-4">
+              <div>
+                  <p class=" font-semibold text-green-500 text-center">
+                   ${data.pricing === null || data.pricing[0].price === '0' ? 'Free of Cost/' : data.pricing[0].price} 
+                   ${data.pricing === null ? 'Basic' : data.pricing[0].plan}</p>
+              </div>
+              <div>
+                  <p class=" font-semibold text-amber-500 text-center">
+                  ${data.pricing === null || data.pricing[1].price === '0' ? 'free of cost/' : data.pricing[1].price}
+                  ${data.pricing === null ? 'Pro' : data.pricing[1].plan}</p>
+              </div>
+              <div>
+                  <p class=" font-semibold text-red-500 text-center">
+                  ${data.pricing === null || data.pricing[2].price === '0' ? 'free of cost/' : data.pricing[2].price} 
+                  ${data.pricing === null ? 'Enterprise' : data.pricing[2].plan}</p>
+              </div>
+          </div> 
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-2 mt-3">
+              <div>
+                <h2 class="text-2xl font-semibold">Features</h2>
+                <ul id="features-infoContainer" class="list-disc pl-4"></ul>
+              </div>   
+              <div>
+                 <h2 class="text-2xl font-semibold">Integrations</h2>
+                 <ul id="integration-infoContainer" class="list-disc pl-4"></ul>
+              </div> 
+          </div>  
+      </div>
+  </div>
+</div>
+<div>
+  <div
+      class="card w-full bg-base-100 shadow-sm border">
+     <div class="relative">
+          <figure class="p-4"><img class="rounded-xl"
+          src="${data.image_link[0]}"
+          alt="Shoes" style="height:270px" />
+          </figure>
+          <div id="accuracy" class="absolute top-6 right-6" >
+          </div>
+     </div>
+      <div
+          class="card-body p-0 p-4 text-center">
+          <h2
+              class="text-2xl font-semibold text-center">
+              ${data.input_output_examples === null ? 'Can you give any example?' : data.input_output_examples[0].input}
+          </h2>
+          <p>
+          ${data.input_output_examples === null ? 'No! Not Yet! Take a break!!!' : data.input_output_examples[0].output}
+          </p>
+      </div>
+  </div>
+</div>
+`;
 
   //accuracy
   const accuracy = document.getElementById('accuracy')
