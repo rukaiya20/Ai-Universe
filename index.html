@@ -7,17 +7,17 @@
         content="IE=edge">
     <meta name="viewport"
         content="width=device-width, initial-scale=1.0">
-    <title>AI Universe Hub</title>
-    <link rel="stylesheet" href="css/all.css">
-    <link rel="stylesheet" href="css/all.min.css">
-    <link rel="stylesheet" href="css/all.css">
-    <script src="js/all.js"></script>
-    <script src="js/all.min.js"></script>
-    <link
-    href="https://cdn.jsdelivr.net/npm/daisyui@2.51.3/dist/full.css"
-    rel="stylesheet" type="text/css" />
-<script src="https://cdn.tailwindcss.com">
-</script>
+        <title>AI Universe Hub</title>
+        <link rel="stylesheet" href="css/all.css">
+        <link rel="stylesheet" href="css/all.min.css">
+        <link rel="stylesheet" href="css/all.css">
+        <script src="js/all.js"></script>
+        <script src="js/all.min.js"></script>
+        <link href="https://cdn.jsdelivr.net/npm/daisyui@2.51.3/dist/full.css"
+        rel="stylesheet" type="text/css" />
+        <script src="https://cdn.tailwindcss.com">
+        </script>
+    
 </head>
 
 <body>
@@ -27,7 +27,7 @@
             class="text-center text-4xl font-bold mt-8">
             AI Universe Hub</h1>
         <div class=" flex justify-center mt-6">
-            <button onclick="sortByDate()"
+            <button onclick="sortByData()"
                 class="btn btn-error text-white">
                 Sort By Date</button>
         </div>
@@ -37,20 +37,32 @@
     <!-- main section start -->
     <main>
         <section>
-            <div id="info-container"
+            <div id="infoContainer"
                 class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  gap-4 w-9/12 mx-auto mt-12">
             </div>
         </section>
         <!-- show all -->
         <section>
-            <div id="show-all"
+            <div id="showAll"
                 class=" flex justify-center mt-6 mb-4 hidden">
                 <button onclick="showAllData()"
-                    class="btn btn-error text-white">Show
-                    All</button>
+                    class="btn btn-error text-white">
+                    Show All</button>
             </div>
         </section>
-       
+        <!-- spinner part -->
+        <section id="spinner"
+            class="hidden">
+            <div
+                class="flex items-center justify-center">
+                <div class="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
+                    role="status">
+                    <span
+                        class="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]">Loading...</span>
+                </div>
+            </div>
+        </section>
+
     </main>
     <!-- main section end -->
 
